@@ -1,0 +1,7 @@
+- name: Install nautilus for file management
+  become: yes
+  package:
+      name: "{{ item }}"
+      state: present
+  loop:
+    - nautilus

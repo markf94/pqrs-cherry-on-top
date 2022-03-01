@@ -1,0 +1,8 @@
+namespace: "qumark"
+name: "pqrs-cherry-on-top"
+version: "0.1.0"
+readme: "README.md"
+authors:
+  - "Mark Fingerhuth"
+license: "MIT"
+repository: "https://github.com/markf94/pqrs-cherry-on-top"
