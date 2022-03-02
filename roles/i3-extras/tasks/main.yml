@@ -1,0 +1,23 @@
+- name: Uninstall vanilla i3 to enable i3-gaps
+  become: yes
+  package:
+      name: i3
+      state: absent
+- name: Install i3-gaps for gaps between windows
+  become: yes
+  package:
+      name: i3-gaps
+      state: present
+- name: Add community Copr for i3blocks-contrib
+  become: yes
+  command:
+    cmd: dnf copr enable -y skidnik/i3blocks
+    creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:skidnik:i3blocks.repo
+- name: Install i3blocks for info blocks in status bars
+  become: yes
+  package:
+      name: "{{ item }}"
+      state: present
+  loop:
+    - i3blocks
+    - i3blocks-contrib
