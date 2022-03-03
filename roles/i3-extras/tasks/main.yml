@@ -111,3 +111,15 @@
     - i3blocks-top.conf
     - i3blocks-bottom.conf
     - i3blocks.d/
+- name: Install packages to scale and beautify i3
+  become: yes
+  package:
+    name: lxappearance
+    state: present
+- name:
+  copy:
+    src: "{{ item }}"
+    dest: "~/{{ item }}"
+  loop:
+    - .xinitrc
+    - .Xresources
