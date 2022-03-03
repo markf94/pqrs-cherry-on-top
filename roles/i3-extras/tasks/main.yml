@@ -78,3 +78,13 @@
     - cp betterlockscreen /usr/local/bin/
     - cp system/betterlockscreen@.service /usr/lib/systemd/system/
     - systemctl enable betterlockscreen@$USER
+- name: Clone nerd-fonts repo
+  git:
+    repo: https://github.com/ryanoasis/nerd-fonts
+    dest: ~/Installed/nerd-fonts
+    version: master
+- name: Install nerd-fonts
+  become: yes
+  command:
+    chdir: "{{ home }}/Installed/nerd-fonts"
+    cmd: ./install.sh
