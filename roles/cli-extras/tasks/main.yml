@@ -1,4 +1,4 @@
-- name: Install nautilus for file management
+- name: Install nautilus, blueberry and arandr
   become: yes
   package:
       name: "{{ item }}"
@@ -7,6 +7,16 @@
     - nautilus
     - blueberry
     - arandr
+- name: Install better CLI tools
+  become: yes
+  package:
+      name: "{{ item }}"
+      state: present
+  loop:
+    - bat
+    - exa
+    - duf
+    - fx
 - name: Copy personal aliases
   copy:
     src: aliases-mark
