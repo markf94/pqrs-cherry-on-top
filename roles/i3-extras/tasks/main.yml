@@ -169,3 +169,19 @@
   loop:
     - unzip Ultimate-Plata-Dark.zip
     - rm Ultimate-Plata-Dark.zip
+- name: Install dunst and compton
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - dunst
+    - compton
+- name: Copy dunstrc file
+  copy:
+    src: dunstrc
+    dest: ~/.pqrs/dunstrc
+- name: Copy compton.conf file
+  copy:
+    src: compton.conf
+    dest: ~/.pqrs/compton.conf

@@ -51,7 +51,9 @@ bindsym $mod+m exec --no-startup-id monitor-switch
 bindsym $mod+t exec --no-startup-id mons -e top
 
 # rofi window manager on Win + Space
-bindsym $mod+space exec "rofi -show combi run,window"
+set $bg-color #2F343F
+set $text-color #F3F4F5
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575CD" -font "Monospace 18"
 
 # Fibonacci window splitting
 # start in opposite orientation from your monitor
