@@ -1,13 +1,13 @@
 - name: Uninstall vanilla i3 to enable i3-gaps
   become: yes
   package:
-      name: i3
-      state: absent
+    name: i3
+    state: absent
 - name: Install i3-gaps for gaps between windows
   become: yes
   package:
-      name: i3-gaps
-      state: present
+    name: i3-gaps
+    state: present
 - name: Add community Copr for i3blocks-contrib
   become: yes
   command:
@@ -16,8 +16,65 @@
 - name: Install i3blocks for info blocks in status bars
   become: yes
   package:
-      name: "{{ item }}"
-      state: present
+    name: "{{ item }}"
+    state: present
   loop:
     - i3blocks
     - i3blocks-contrib
+- name: Add community Copr for i3lock-color
+  become: yes
+  command:
+    cmd: dnf copr enable -y tokariew/i3lock-color
+    creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tokariew:i3lock-color.repo
+- name: Install betterlockscreen dependencies
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - xset
+    - i3lock-color
+    - ImageMagick
+    - xdpyinfo
+    - xrandr
+    - xrdb
+    - autoconf
+    - automake
+    - cairo-devel
+    - fontconfig
+    - gcc
+    - libev-devel
+    - libjpeg-turbo-devel
+    - libXinerama
+    - libxkbcommon-devel
+    - libxkbcommon-x11-devel
+    - libXrandr
+    - pam-devel
+    - pkgconf
+    - xcb-util-image-devel
+    - xcb-util-xrm-devel
+- name: Install fontawesome for status bar icons
+  become: yes
+  package:
+    name: fontawesome-fonts
+    state: present
+- name: Download betterlockscreen
+  become: yes
+  command:
+    chdir: "{{ home }}/Installed/"
+    cmd: "{{ item }}"
+    creates: "{{ home }}/Installed/betterlockscreen-main"
+  loop:
+    - wget https://github.com/pavanjadhaw/betterlockscreen/archive/refs/heads/main.zip
+    - unzip main.zip
+    - rm main.zip
+- name: Install betterlockscreen
+  become: yes
+  command:
+    chdir: "{{ home }}/Installed/betterlockscreen-main"
+    cmd: "{{ item }}"
+  loop:
+    - chmod u+x betterlockscreen
+    - cp betterlockscreen /usr/local/bin/
+    - cp system/betterlockscreen@.service /usr/lib/systemd/system/
+    - systemctl enable betterlockscreen@$USER
