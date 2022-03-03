@@ -7,3 +7,7 @@
     - nautilus
     - blueberry
     - arandr
+- name: Copy personal aliases
+  copy:
+    src: aliases-mark
+    dest: ~/.pqrs/bashrc.d/aliases-mark

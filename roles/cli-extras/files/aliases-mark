@@ -1,0 +1,50 @@
+# Custom aliases
+
+# general stuff
+alias python="bpython"
+alias r="ranger"
+alias ".."="cd .."
+alias ll="ls -al"
+
+# screenshots
+alias sc="gnome-screenshot"
+alias sca="gnome-screenshot -a"
+
+# programs
+alias vcvrack="cd /home/qumark/Installed/Rack2Free && ./Rack"
+alias threema="Threema"
+
+# Kubernetes
+alias kcn="kubectl config --set-context --current --namespace"
+alias kdp="kubectl describe pod"
+alias kl="kubectl logs"
+alias kgp="kubectl get pods"
+
+# Git
+alias gc="git commit"
+alias gcam="git commit --amend"
+alias glo="git log --oneline"
+alias gpr="git pull --rebase"
+
+
+gccd () {
+  if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: gccd <url>"
+    echo "Clones a repo from url with git and cd's into its root folder immediately"
+    return 1
+  else
+    git clone "$1" && cd $(basename $_ .git)
+  fi
+}
+
+mkcd () {
+  if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: mkcd <path><foldername>"
+    echo "Create a folder and cd into it directly"
+    return 1
+  else
+    mkdir "$1" && cd $_
+  fi
+}
