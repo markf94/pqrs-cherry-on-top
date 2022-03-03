@@ -1,3 +1,7 @@
+- name: Copy i3 config file
+  copy:
+    src: i3-config
+    dest: ~/.pqrs/i3-config
 - name: Uninstall vanilla i3 to enable i3-gaps
   become: yes
   package:
@@ -64,8 +68,11 @@
 - name: Install fontawesome for status bar icons
   become: yes
   package:
-    name: fontawesome-fonts
+    name: "{{ item }}"
     state: present
+  loop:
+    - fontawesome-fonts
+    - fontawesome5-fonts-all
 - name: Download betterlockscreen
   become: yes
   command:
@@ -96,3 +103,11 @@
   command:
     chdir: "{{ home }}/Installed/nerd-fonts"
     cmd: ./install.sh
+- name: Copy i3blocks config files
+  copy:
+    src: "{{ item }}"
+    dest: "~/.pqrs/{{ item }}"
+  loop:
+    - i3blocks-top.conf
+    - i3blocks-bottom.conf
+    - i3blocks.d/
