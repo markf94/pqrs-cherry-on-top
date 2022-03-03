@@ -21,6 +21,14 @@
   loop:
     - i3blocks
     - i3blocks-contrib
+- name: Install dependencies for my personal i3blocks
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - kbdd
+    - acpi
 - name: Add community Copr for i3lock-color
   become: yes
   command:
