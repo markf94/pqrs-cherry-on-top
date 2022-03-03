@@ -116,10 +116,56 @@
   package:
     name: lxappearance
     state: present
-- name:
+- name: Copy X config files
   copy:
     src: "{{ item }}"
     dest: "~/{{ item }}"
   loop:
     - .xinitrc
     - .Xresources
+- name: Copy icon packages
+  copy:
+    src: "{{ item }}"
+    dest: "~/.icons/{{ item }}"
+  loop:
+    - candy-icons.zip
+    - sovtc_icons.zip
+- name: Installing candy-icons
+  command:
+    chdir: ~/.icons
+    cmd: "{{ item }}"
+    creates: ~/.icons/candy-icons
+  loop:
+    - unzip candy-icons.zip
+    - rm candy-icons.zip
+- name: Installing sovtc-icons
+  command:
+    chdir: ~/.icons
+    cmd: "{{ item }}"
+    creates: ~/.icons/sovtc_icons
+  loop:
+    - unzip sovtc_icons.zip
+    - rm sovtc_icons.zip
+- name: Copy themes packages
+  copy:
+    src: "{{ item }}"
+    dest: "~/.themes/{{ item }}"
+  loop:
+    - cyberhack.zip
+    - Ultimate-Plata-Dark.zip
+- name: Installing themes packages
+  command:
+    chdir: ~/.themes
+    cmd: "{{ item }}"
+    creates: ~/.themes/cyberhack
+  loop:
+    - unzip cyberhack.zip
+    - rm cyberhack.zip
+- name: Installing themes packages
+  command:
+    cmd: "{{ item }}"
+    chdir: ~/.themes
+    creates: ~/.themes/Ultimate-Plata-Dark
+  loop:
+    - unzip Ultimate-Plata-Dark.zip
+    - rm Ultimate-Plata-Dark.zip
