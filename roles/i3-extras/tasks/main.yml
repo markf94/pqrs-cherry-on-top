@@ -152,8 +152,9 @@
     dest: "~/.themes/{{ item }}"
   loop:
     - cyberhack.zip
+    - Nordic-master.zip
     - Ultimate-Plata-Dark.zip
-- name: Installing themes packages
+- name: Installing cyberhack theme package
   command:
     chdir: ~/.themes
     cmd: "{{ item }}"
@@ -161,7 +162,7 @@
   loop:
     - unzip cyberhack.zip
     - rm cyberhack.zip
-- name: Installing themes packages
+- name: Installing Ultimate-Plata-Dark theme package
   command:
     cmd: "{{ item }}"
     chdir: ~/.themes
@@ -169,6 +170,15 @@
   loop:
     - unzip Ultimate-Plata-Dark.zip
     - rm Ultimate-Plata-Dark.zip
+- name: Installing Nordic-master theme package
+  command:
+    cmd: "{{ item }}"
+    chdir: ~/.themes
+    creates: ~/.themes/Nordic-master
+  loop:
+    - unzip Nordic-master.zip
+    - rm Nordic-master.zip
+
 - name: Install dunst and compton
   become: yes
   package:
