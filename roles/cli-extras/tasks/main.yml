@@ -21,3 +21,13 @@
   copy:
     src: aliases-mark
     dest: ~/.pqrs/bashrc.d/aliases-mark
+- name: Copy dir_colors file
+  copy:
+    src: dir_colors
+    dest: ~/.pqrs/dir_colors
+- name: Link dir_colors file
+  file:
+    src: ~/.pqrs/dir_colors
+    dest: ~/.dir_colors
+    state: link
+    force: yes
