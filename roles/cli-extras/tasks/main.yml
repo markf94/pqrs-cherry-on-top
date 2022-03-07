@@ -1,8 +1,8 @@
 - name: Install nautilus, blueberry and arandr
   become: yes
   package:
-      name: "{{ item }}"
-      state: present
+    name: "{{ item }}"
+    state: present
   loop:
     - nautilus
     - blueberry
@@ -10,8 +10,8 @@
 - name: Install better CLI tools
   become: yes
   package:
-      name: "{{ item }}"
-      state: present
+    name: "{{ item }}"
+    state: present
   loop:
     - bat
     - exa
@@ -31,3 +31,8 @@
     dest: ~/.dir_colors
     state: link
     force: yes
+- name: Install fancy screenfetch
+  become: yes
+  package:
+    name: screenfetch
+    state: present

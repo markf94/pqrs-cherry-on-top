@@ -33,6 +33,7 @@
   loop:
     - kbdd
     - acpi
+    - sysstat
 - name: Add community Copr for i3lock-color
   become: yes
   command:
@@ -111,7 +112,7 @@
     - i3blocks-top.conf
     - i3blocks-bottom.conf
     - i3blocks.d/
-- name: Install packages to scale and beautify i3
+- name: Install lxappearance to scale and beautify i3
   become: yes
   package:
     name: lxappearance
@@ -178,7 +179,6 @@
   loop:
     - unzip Nordic-master.zip
     - rm Nordic-master.zip
-
 - name: Install dunst and compton
   become: yes
   package:
