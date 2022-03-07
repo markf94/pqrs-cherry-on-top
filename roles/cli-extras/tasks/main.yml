@@ -36,3 +36,13 @@
   package:
     name: screenfetch
     state: present
+- name: Clone pipes.sh repo
+  git:
+    repo: git@github.com:pipeseroni/pipes.sh.git
+    dest: ~/Installed/pipes.sh
+    version: master
+- name: Install pipes.sh
+  become: yes
+  command:
+    chdir: "{{ home }}/Installed/pipes.sh"
+    cmd: make install
