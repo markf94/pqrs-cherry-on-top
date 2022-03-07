@@ -16,15 +16,15 @@
 
 #------------------------------------------------------------------------
 if [[ -z "$INTERFACE" ]] ; then
-    INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+    INTERFACE="${BLOCK_INSTANCE:-wlp9s0}"
 fi
 #------------------------------------------------------------------------
 
-COLOR_GE80=${COLOR_GE80:-#00FF00}
-COLOR_GE60=${COLOR_GE60:-#FFF600}
-COLOR_GE40=${COLOR_GE40:-#FFAE00}
-COLOR_LOWR=${COLOR_LOWR:-#FF0000}
-COLOR_DOWN=${COLOR_DOWN:-#FF0000}
+COLOR_GE80=${COLOR_GE80:-#a3be8c}
+COLOR_GE60=${COLOR_GE60:-#ebcb8b}
+COLOR_GE40=${COLOR_GE40:-#b48ead}
+COLOR_LOWR=${COLOR_LOWR:-#d08770}
+COLOR_DOWN=${COLOR_DOWN:-#bf616a}
 
 # As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
 # connection (think desktop), the corresponding block should not be displayed.
@@ -46,8 +46,9 @@ QUALITY=$(iw dev ${INTERFACE} link | grep 'dBm$' | grep -Eoe '-[0-9]{2}' | awk '
 
 #------------------------------------------------------------------------
 
-echo "<b>${QUALITY}%</b>" # full text
-echo "<b>${QUALITY}%</b>" # short text
+echo "${QUALITY}%" # full text
+echo "${QUALITY}%" # short text
+
 
 # color
 if [[ $QUALITY -ge 80 ]]; then
@@ -61,15 +62,15 @@ else
 fi
 
 # background
-echo \#000000
+#echo \#000000
 
 # border
-if [[ $QUALITY -ge 80 ]]; then
-    echo $COLOR_GE80
-elif [[ $QUALITY -ge 60 ]]; then
-    echo $COLOR_GE60
-elif [[ $QUALITY -ge 40 ]]; then
-    echo $COLOR_GE40
-else
-    echo $COLOR_LOWR
-fi
+#if [[ $QUALITY -ge 80 ]]; then
+#    echo $COLOR_GE80
+#elif [[ $QUALITY -ge 60 ]]; then
+#    echo $COLOR_GE60
+#elif [[ $QUALITY -ge 40 ]]; then
+#    echo $COLOR_GE40
+#else
+#    echo $COLOR_LOWR
+#fi

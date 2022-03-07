@@ -47,29 +47,29 @@ $cpu_usage eq -1 and die 'Can\'t find CPU information';
 
 # Print short_text, full_text
 print "${label}";
-printf "<b>%.${decimals}f%%</b>\n", $cpu_usage;
+printf "%.${decimals}f%%\n", $cpu_usage;
 print "${label}";
-printf "<b>%.${decimals}f%%</b>\n", $cpu_usage;
+printf "%.${decimals}f%%\n", $cpu_usage;
 
 # Print color
 if ($cpu_usage >= $t_crit) {
-    print "#FF0000\n";
+    print "#bf616a\n";
 } elsif ($cpu_usage >= $t_warn) {
-    print "#FFFC00\n";
+    print "#ebcb8b\n";
 } else {
-    print "#FFFFFF\n";
+    print "#d8dee9\n";
 }
 
 # background
-print "#000000\n";
+#print "#000000\n";
 
 # Print border
-if ($cpu_usage >= $t_crit) {
-    print "#FF0000\n";
-} elsif ($cpu_usage >= $t_warn) {
-    print "#FFFC00\n";
-} else {
-    print "#FFFFFF\n";
-}
+#if ($cpu_usage >= $t_crit) {
+#    print "#bf616a\n";
+#} elsif ($cpu_usage >= $t_warn) {
+#    print "#ebcb8b\n";
+#} else {
+#    print "#d8dee9\n";
+#}
 
 exit 0;

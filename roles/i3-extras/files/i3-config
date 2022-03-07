@@ -163,7 +163,7 @@ bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r move workspace to output right
+bindsym $mod+Shift+r exec "i3-msg restart"
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -205,6 +205,11 @@ bar {
   tray_output       primary
   tray_padding      2
   separator_symbol  "〉"
+  colors {
+      background #3b4252
+      statusline #ffffff
+      separator #d8dee9
+  }
 }
 
 bar {
@@ -215,15 +220,15 @@ bar {
   separator_symbol  "〉"
 
   colors {
-      #background #6c6c6c
-      background #000000
+      background #3b4252
       statusline #ffffff
+      separator #d8dee9
 
       # name              border  bkgrd   text
-      focused_workspace   #333333 #af5fff #000000
-      active_workspace    #333333 #00d7d7 #000000
-      inactive_workspace  #333333 #000000 #00d7d7
-      urgent_workspace    #333333 #d7005f #ffffff
+      focused_workspace   #333333 #b48ead #2e3440
+      active_workspace    #333333 #88c0d0 #2e3440
+      inactive_workspace  #333333 #2e3440 #88c0d0
+      urgent_workspace    #333333 #bf616a #d8dee9
   }
 }
 
