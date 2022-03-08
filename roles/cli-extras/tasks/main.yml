@@ -52,3 +52,15 @@
     executable: /usr/bin/pip3
     name: asciimol
     state: present
+- name: Download mmterm viewer
+  git:
+    repo: git@github.com:jgreener64/mmterm.git
+    dest: ~/Installed/mmterm
+    version: master
+  when: role_version is version("0.1.13", "lt")
+- name: Install mmterm
+  become: yes
+  command:
+    chdir: "{{ home }}/Installed/mmterm"
+    cmd: /usr/bin/pip3 install -e .
+  when: role_version is version("0.1.13", "lt")
