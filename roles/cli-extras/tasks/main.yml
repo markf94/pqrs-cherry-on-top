@@ -46,3 +46,9 @@
   command:
     chdir: "{{ home }}/Installed/pipes.sh"
     cmd: make install
+- name: Install asciiMol viewer
+  become: yes
+  pip:
+    executable: /usr/bin/pip3
+    name: asciimol
+    state: present
