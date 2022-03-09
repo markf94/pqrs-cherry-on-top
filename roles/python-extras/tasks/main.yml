@@ -1,5 +1,5 @@
 - name: Install Jupyter notebook
   pip:
     executable: /usr/bin/pip3
-    name: jupyter-notebook
+    name: notebook
     state: present

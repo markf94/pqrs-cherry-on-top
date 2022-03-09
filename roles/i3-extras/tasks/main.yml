@@ -39,6 +39,11 @@
   command:
     cmd: dnf copr enable -y tokariew/i3lock-color
     creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tokariew:i3lock-color.repo
+- name: Uninstall i3lock before installing i3lock-color
+  become: yes
+  package:
+    name: i3lock
+    state: absent
 - name: Install betterlockscreen dependencies
   become: yes
   package:
