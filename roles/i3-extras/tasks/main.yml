@@ -99,6 +99,7 @@
     repo: https://github.com/ryanoasis/nerd-fonts
     dest: ~/Installed/nerd-fonts
     version: master
+    depth: 1
 - name: Install nerd-fonts
   become: yes
   command:
