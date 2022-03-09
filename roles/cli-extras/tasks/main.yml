@@ -7,6 +7,7 @@
     - nautilus
     - blueberry
     - arandr
+  when: role_version is version("0.1.13", "lt")
 - name: Install better CLI tools
   become: yes
   package:
@@ -17,41 +18,49 @@
     - exa
     - duf
     - fx
+  when: role_version is version("0.1.13", "lt")
 - name: Copy personal aliases
   copy:
     src: aliases-mark
     dest: ~/.pqrs/bashrc.d/aliases-mark
+  when: role_version is version("0.1.13", "lt")
 - name: Copy dir_colors file
   copy:
     src: dir_colors
     dest: ~/.pqrs/dir_colors
+  when: role_version is version("0.1.13", "lt")
 - name: Link dir_colors file
   file:
     src: ~/.pqrs/dir_colors
     dest: ~/.dir_colors
     state: link
     force: yes
+  when: role_version is version("0.1.13", "lt")
 - name: Install fancy screenfetch
   become: yes
   package:
     name: screenfetch
     state: present
+  when: role_version is version("0.1.13", "lt")
 - name: Clone pipes.sh repo
   git:
     repo: git@github.com:pipeseroni/pipes.sh.git
     dest: ~/Installed/pipes.sh
     version: master
+  when: role_version is version("0.1.13", "lt")
 - name: Install pipes.sh
   become: yes
   command:
     chdir: "{{ home }}/Installed/pipes.sh"
     cmd: make install
+  when: role_version is version("0.1.13", "lt")
 - name: Install asciiMol viewer
   become: yes
   pip:
     executable: /usr/bin/pip3
     name: asciimol
     state: present
+  when: role_version is version("0.1.13", "lt")
 - name: Download mmterm viewer
   git:
     repo: git@github.com:jgreener64/mmterm.git

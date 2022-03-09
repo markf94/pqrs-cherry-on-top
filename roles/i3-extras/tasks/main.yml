@@ -2,21 +2,25 @@
   copy:
     src: i3-config
     dest: ~/.pqrs/i3-config
+  when: role_version is version("0.1.19", "lt")
 - name: Uninstall vanilla i3 to enable i3-gaps
   become: yes
   package:
     name: i3
     state: absent
+  when: role_version is version("0.1.19", "lt")
 - name: Install i3-gaps for gaps between windows
   become: yes
   package:
     name: i3-gaps
     state: present
+  when: role_version is version("0.1.19", "lt")
 - name: Add community Copr for i3blocks-contrib
   become: yes
   command:
     cmd: dnf copr enable -y skidnik/i3blocks
     creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:skidnik:i3blocks.repo
+  when: role_version is version("0.1.19", "lt")
 - name: Install i3blocks for info blocks in status bars
   become: yes
   package:
@@ -25,6 +29,7 @@
   loop:
     - i3blocks
     - i3blocks-contrib
+  when: role_version is version("0.1.19", "lt")
 - name: Install dependencies for my personal i3blocks
   become: yes
   package:
@@ -34,16 +39,19 @@
     - kbdd
     - acpi
     - sysstat
+  when: role_version is version("0.1.19", "lt")
 - name: Add community Copr for i3lock-color
   become: yes
   command:
     cmd: dnf copr enable -y tokariew/i3lock-color
     creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:tokariew:i3lock-color.repo
+  when: role_version is version("0.1.19", "lt")
 - name: Uninstall i3lock before installing i3lock-color
   become: yes
   package:
     name: i3lock
     state: absent
+  when: role_version is version("0.1.19", "lt")
 - name: Install betterlockscreen dependencies
   become: yes
   package:
@@ -71,6 +79,7 @@
     - pkgconf
     - xcb-util-image-devel
     - xcb-util-xrm-devel
+  when: role_version is version("0.1.19", "lt")
 - name: Install fontawesome for status bar icons
   become: yes
   package:
@@ -79,6 +88,7 @@
   loop:
     - fontawesome-fonts
     - fontawesome5-fonts-all
+  when: role_version is version("0.1.19", "lt")
 - name: Download betterlockscreen
   become: yes
   command:
@@ -89,6 +99,7 @@
     - wget https://github.com/pavanjadhaw/betterlockscreen/archive/refs/heads/main.zip
     - unzip main.zip
     - rm main.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Install betterlockscreen
   become: yes
   command:
@@ -99,17 +110,21 @@
     - cp betterlockscreen /usr/local/bin/
     - cp system/betterlockscreen@.service /usr/lib/systemd/system/
     - systemctl enable betterlockscreen@$USER
+  when: role_version is version("0.1.19", "lt")
 - name: Clone nerd-fonts repo
   git:
     repo: https://github.com/ryanoasis/nerd-fonts
     dest: ~/Installed/nerd-fonts
     version: master
     depth: 1
+    force: yes
+  when: role_version is version("0.1.19", "lt")
 - name: Install nerd-fonts
   become: yes
   command:
     chdir: "{{ home }}/Installed/nerd-fonts"
     cmd: ./install.sh
+  when: role_version is version("0.1.19", "lt")
 - name: Copy i3blocks config files
   copy:
     src: "{{ item }}"
@@ -118,11 +133,13 @@
     - i3blocks-top.conf
     - i3blocks-bottom.conf
     - i3blocks.d/
+  when: role_version is version("0.1.19", "lt")
 - name: Install lxappearance to scale and beautify i3
   become: yes
   package:
     name: lxappearance
     state: present
+  when: role_version is version("0.1.19", "lt")
 - name: Copy X config files
   copy:
     src: "{{ item }}"
@@ -130,6 +147,7 @@
   loop:
     - .xinitrc
     - .Xresources
+  when: role_version is version("0.1.19", "lt")
 - name: Copy icon packages
   copy:
     src: "{{ item }}"
@@ -137,6 +155,7 @@
   loop:
     - candy-icons.zip
     - sovtc_icons.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Installing candy-icons
   command:
     chdir: ~/.icons
@@ -145,6 +164,7 @@
   loop:
     - unzip candy-icons.zip
     - rm candy-icons.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Installing sovtc-icons
   command:
     chdir: ~/.icons
@@ -153,6 +173,7 @@
   loop:
     - unzip sovtc_icons.zip
     - rm sovtc_icons.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Copy themes packages
   copy:
     src: "{{ item }}"
@@ -161,6 +182,7 @@
     - cyberhack.zip
     - Nordic-master.zip
     - Ultimate-Plata-Dark.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Installing cyberhack theme package
   command:
     chdir: ~/.themes
@@ -169,6 +191,7 @@
   loop:
     - unzip cyberhack.zip
     - rm cyberhack.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Installing Ultimate-Plata-Dark theme package
   command:
     cmd: "{{ item }}"
@@ -177,6 +200,7 @@
   loop:
     - unzip Ultimate-Plata-Dark.zip
     - rm Ultimate-Plata-Dark.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Installing Nordic-master theme package
   command:
     cmd: "{{ item }}"
@@ -185,6 +209,7 @@
   loop:
     - unzip Nordic-master.zip
     - rm Nordic-master.zip
+  when: role_version is version("0.1.19", "lt")
 - name: Install dunst and compton
   become: yes
   package:
@@ -193,11 +218,14 @@
   loop:
     - dunst
     - compton
+  when: role_version is version("0.1.19", "lt")
 - name: Copy dunstrc file
   copy:
     src: dunstrc
     dest: ~/.pqrs/dunstrc
+  when: role_version is version("0.1.19", "lt")
 - name: Copy compton.conf file
   copy:
     src: compton.conf
     dest: ~/.pqrs/compton.conf
+  when: role_version is version("0.1.19", "lt")
