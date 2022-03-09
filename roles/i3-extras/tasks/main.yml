@@ -111,6 +111,23 @@
     - cp system/betterlockscreen@.service /usr/lib/systemd/system/
     - systemctl enable betterlockscreen@$USER
   when: role_version is version("0.1.19", "lt")
+- name: Create wallpapers directory
+  file:
+    path: ~/Pictures/wallpapers
+    state: directory
+  when: role_version is version("0.1.20", "lt")
+- name: Copy wallpapers
+  copy:
+    src: "{{ item }}"
+    dest: "~/Pictures/wallpapers/{{ item }}"
+  loop:
+    - nordic-wall.jpg
+    - space_surfer.jpg
+  when: role_version is version("0.1.20", "lt")
+- name: Configure betterlockscreen
+  command:
+    cmd: betterlockscreen -u ~/Pictures/wallpapers/nordic-wall.jpg
+  when: role_version is version("0.1.20", "lt")
 - name: Clone nerd-fonts repo
   git:
     repo: https://github.com/ryanoasis/nerd-fonts
@@ -148,6 +165,11 @@
     - .xinitrc
     - .Xresources
   when: role_version is version("0.1.19", "lt")
+- name: Create .icons directory
+  file:
+    path: ~/.icons
+    state: directory
+  when: role_version is version("0.1.20", "lt")
 - name: Copy icon packages
   copy:
     src: "{{ item }}"
@@ -174,6 +196,11 @@
     - unzip sovtc_icons.zip
     - rm sovtc_icons.zip
   when: role_version is version("0.1.19", "lt")
+- name: Create .themes directory
+  file:
+    path: ~/.themes
+    state: directory
+  when: role_version is version("0.1.20", "lt")
 - name: Copy themes packages
   copy:
     src: "{{ item }}"
