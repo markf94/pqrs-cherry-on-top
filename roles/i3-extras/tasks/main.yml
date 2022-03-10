@@ -181,7 +181,7 @@
     - i3blocks-top.conf
     - i3blocks-bottom.conf
     - i3blocks.d/
-  when: role_version is version("0.1.19", "lt")
+  when: role_version is version("0.1.23", "lt")
 - name: Install lxappearance to scale and beautify i3
   become: yes
   package:
