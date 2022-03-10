@@ -7,6 +7,11 @@ alias ".."="cd .."
 alias ls="exa"
 alias ll="ls -al"
 alias du="duf"
+alias grep='grep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias less='less -R'
 
 # screenshots
 alias sc="gnome-screenshot"
@@ -23,6 +28,7 @@ alias kl="kubectl logs"
 alias kgp="kubectl get pods"
 
 # Git
+alias g="git"
 alias gc="git commit"
 alias gcam="git commit --amend"
 alias glo="git log --oneline"

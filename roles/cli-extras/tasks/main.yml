@@ -23,7 +23,7 @@
   copy:
     src: aliases-mark
     dest: ~/.pqrs/bashrc.d/aliases-mark
-  when: role_version is version("0.1.13", "lt")
+  when: role_version is version("0.1.19", "lt")
 - name: Copy dir_colors file
   copy:
     src: dir_colors
