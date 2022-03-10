@@ -40,6 +40,37 @@
     - acpi
     - sysstat
   when: role_version is version("0.1.19", "lt")
+- name: Clone i3blocks-weather repo
+  git:
+    repo: https://github.com/hirotasoshu/i3blocks-weather
+    dest: ~/Installed/i3blocks-weather
+    version: master
+    depth: 1
+    force: yes
+  when: role_version is version("0.1.21", "lt")
+- name: Install i3blocks-weather
+  copy:
+    src: "~/Installed/i3blocks-weather/{{ item }}"
+    dest: "~/.pqrs/i3blocks.d/{{ item }}"
+    mode: +x
+  loop:
+    - weather.py
+    - codes.py
+  when: role_version is version("0.1.22", "lt")
+- name: Clone weather-icons repo
+  git:
+    repo: https://github.com/erikflowers/weather-icons
+    dest: ~/Installed/weather-icons
+    version: master
+    depth: 1
+    force: yes
+  when: role_version is version("0.1.21", "lt")
+- name: Install weather-icons
+  become: yes
+  copy:
+    src: "~/Installed/weather-icons/font/"
+    dest: "/usr/share/fonts/weather-icons"
+  when: role_version is version("0.1.21", "lt")
 - name: Add community Copr for i3lock-color
   become: yes
   command:
