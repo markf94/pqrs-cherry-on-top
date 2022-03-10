@@ -91,3 +91,24 @@
     state: link
     force: yes
   when: role_version is version("0.1.14", "lt")
+- name: It's raining top's
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - iotop
+    - bpytop
+    - iftop
+  when: role_version is version("0.1.16", "lt")
+- name: Downloading ctop (container monitoring)
+  become: yes
+  command:
+    cmd: "sudo wget https://github.com/bcicen/ctop/releases/download/0.7.6/ctop-0.7.6-linux-amd64 -O /usr/local/bin/ctop"
+  when: role_version is version("0.1.16", "lt")
+- name: Making ctop executable
+  become: yes
+  file:
+    dest: /usr/local/bin/ctop
+    mode: +x
+  when: role_version is version("0.1.16", "lt")
