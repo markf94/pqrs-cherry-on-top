@@ -73,3 +73,21 @@
     chdir: "{{ home }}/Installed/mmterm"
     cmd: /usr/bin/pip3 install -e .
   when: role_version is version("0.1.13", "lt")
+- name: Install starship
+  become: yes
+  package:
+    name: starship
+    state: present
+  when: role_version is version("0.1.14", "lt")
+- name: Copy starship config
+  copy:
+    src: starship.toml
+    dest: ~/.pqrs/starship.toml
+  when: role_version is version("0.1.14", "lt")
+- name: Link starship.toml file
+  file:
+    src: ~/.pqrs/starship.toml
+    dest: ~/.config/starship.toml
+    state: link
+    force: yes
+  when: role_version is version("0.1.14", "lt")

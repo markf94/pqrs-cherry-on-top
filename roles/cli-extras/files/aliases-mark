@@ -6,7 +6,6 @@ alias r="ranger"
 alias ".."="cd .."
 alias ls="exa"
 alias ll="ls -al"
-alias cat="bat"
 alias du="duf"
 
 # screenshots
