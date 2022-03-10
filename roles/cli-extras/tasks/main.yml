@@ -123,3 +123,20 @@
     chdir: "{{ home }}/Installed"
     cmd: sudo dnf install gotop_v4.1.3_linux_amd64.rpm -y
   when: role_version is version("0.1.17", "lt")
+- name: Install perl (for fetch-master 6000)
+  become: yes
+  package:
+    name: perl
+    state: present
+  when: role_version is version("0.1.18", "lt")
+- name: Download fetch-master 6000
+  command:
+    chdir: ~/Installed
+    cmd: "wget https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.pl -O fm6000"
+  when: role_version is version("0.1.18", "lt")
+- name: Install fetch-master 6000
+  copy:
+    src: ~/Installed/fm6000
+    dest: ~/.local/bin
+    mode: +x
+  when: role_version is version("0.1.18", "lt")
