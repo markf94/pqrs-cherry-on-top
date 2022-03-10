@@ -36,12 +36,12 @@
     state: link
     force: yes
   when: role_version is version("0.1.13", "lt")
-- name: Install fancy screenfetch
+- name: Install fancy neofetch
   become: yes
   package:
-    name: screenfetch
+    name: neofetch
     state: present
-  when: role_version is version("0.1.13", "lt")
+  when: role_version is version("0.1.15", "lt")
 - name: Clone pipes.sh repo
   git:
     repo: git@github.com:pipeseroni/pipes.sh.git
