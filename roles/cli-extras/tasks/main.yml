@@ -1,11 +1,12 @@
-- name: Install nautilus, blueberry and arandr
+- name: Install nautilus, blueman, pavucontrol and arandr
   become: yes
   package:
     name: "{{ item }}"
     state: present
   loop:
     - nautilus
-    - blueberry
+    - blueman
+    - pavucontrol
     - arandr
   when: role_version is version("0.1.13", "lt")
 - name: Install better CLI tools
