@@ -48,6 +48,11 @@
     depth: 1
     force: yes
   when: role_version is version("0.1.21", "lt")
+- name: Create i3blocks.d directory
+  file:
+    path: "~/.pqrs/i3blocks.d"
+    state: directory
+    mode: '0755'
 - name: Install i3blocks-weather
   copy:
     src: "~/Installed/i3blocks-weather/{{ item }}"
