@@ -77,6 +77,10 @@
     chdir: "{{ home }}/Installed/mmterm"
     cmd: /usr/bin/pip3 install -e .
   when: role_version is version("0.1.13", "lt")
+- name: Enable COPR repository atim/starship
+  become: yes
+  command: dnf copr enable atim/starship -y
+  when: role_version is version("0.1.14", "lt")
 - name: Install starship
   become: yes
   package:
