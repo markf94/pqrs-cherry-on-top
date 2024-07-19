@@ -18,7 +18,10 @@
     - bat
     - exa
     - duf
-    - fx
+  when: role_version is version("0.1.13", "lt")
+- name: Install fx via snap
+  become: yes
+  command: snap install fx -y
   when: role_version is version("0.1.13", "lt")
 - name: Copy personal aliases
   copy:
