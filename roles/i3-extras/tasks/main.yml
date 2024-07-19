@@ -3,18 +3,6 @@
     src: i3-config
     dest: ~/.pqrs/i3-config
   when: role_version is version("0.1.19", "lt")
-- name: Uninstall vanilla i3 to enable i3-gaps
-  become: yes
-  package:
-    name: i3
-    state: absent
-  when: role_version is version("0.1.19", "lt")
-- name: Install i3-gaps for gaps between windows
-  become: yes
-  package:
-    name: i3-gaps
-    state: present
-  when: role_version is version("0.1.19", "lt")
 - name: Add community Copr for i3blocks-contrib
   become: yes
   command:
