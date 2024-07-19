@@ -274,22 +274,16 @@
     - unzip Nordic-master.zip
     - rm Nordic-master.zip
   when: role_version is version("0.1.19", "lt")
-- name: Install dunst and compton
+- name: Install dunst
   become: yes
   package:
     name: "{{ item }}"
     state: present
   loop:
     - dunst
-    - compton
   when: role_version is version("0.1.19", "lt")
 - name: Copy dunstrc file
   copy:
     src: dunstrc
     dest: ~/.pqrs/dunstrc
-  when: role_version is version("0.1.19", "lt")
-- name: Copy compton.conf file
-  copy:
-    src: compton.conf
-    dest: ~/.pqrs/compton.conf
   when: role_version is version("0.1.19", "lt")
